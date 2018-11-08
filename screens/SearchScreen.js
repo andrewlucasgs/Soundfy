@@ -1,8 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
 
-export default class LinksScreen extends React.Component {
+export default class SearchScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };

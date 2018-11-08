@@ -3,12 +3,16 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import LibraryScreen from '../screens/LibraryScreen';
+import SearchScreen from '../screens/SearchScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import MusicsScreen from '../screens/MusicsScreen';
+
+
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: LibraryScreen,
+  Musics: MusicsScreen,
 });
 
 HomeStack.navigationOptions = {
@@ -25,11 +29,11 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const SearchStack = createStackNavigator({
+  Search: SearchScreen,
 });
 
-LinksStack.navigationOptions = {
+SearchStack.navigationOptions = {
   tabBarLabel: 'Buscar',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -55,7 +59,7 @@ SettingsStack.navigationOptions = {
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  SearchStack,
   SettingsStack,
 },
   {
@@ -68,7 +72,7 @@ export default createBottomTabNavigator({
         fontSize: 12,
       },
       style: {
-
+        backgroundColor: '#474747'
       },
     }
   }
