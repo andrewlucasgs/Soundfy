@@ -1,0 +1,3 @@
+export const API_KEY = '0648b858235453ccb23e75c59ba5a605';
+
+export const API_SECRET = '0648b858235453ccb23e75c59ba5a605';
