@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Icon } from 'expo';
 import music from '../constants/Api'
+
 export default class LibraryScreen extends React.Component {
     static navigationOptions = {
         header: null,
@@ -17,17 +18,30 @@ export default class LibraryScreen extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            musics: music
+            musics: music,
+            albuns: this.groupBy(music, "album")
         };
     }
-    componentDidMount() {
-      this.props.navigation.addListener('willFocus', (playload)=>{
-        this.setState({musics: music});
-      });
-    }
+
     updateState() {
-        this.setState({musics: music})
-     };
+        this.setState({ musics: music })
+    };
+
+    groupBy(collection, property) {
+        var i = 0, val, index,
+            values = [], result = [];
+        for (; i < collection.length; i++) {
+            val = collection[i][property];
+            index = values.indexOf(val);
+            if (index > -1)
+                result[index].push(collection[i]);
+            else {
+                values.push(val);
+                result.push([collection[i]]);
+            }
+        }
+        return result;
+    };
 
     render() {
 
@@ -35,12 +49,11 @@ export default class LibraryScreen extends React.Component {
             <View style={styles.container}>
 
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-                    {this.state.musics.map(music => {
-                        if (music.favorite)
+                    {this.state.albuns.map(music => {
                             return (
-                                <TouchableOpacity key={music.name} style={styles.music}>
-                                    <Text style={styles.items}>{music.name}</Text>
-                                    <TouchableOpacity onPress={() => { music.favorite = false;this.updateState() }} style={{ padding: 10, backgroundColor: 'gray' }}>
+                                <TouchableOpacity key={music[0].name} style={styles.music}>
+                                    <Text style={styles.items}>{music[0].album}</Text>
+                                    <TouchableOpacity onPress={() => { console.log(music); this.updateState() }} style={{ padding: 10, backgroundColor: 'gray' }}>
                                         <Text style={{ fontSize: 30, color: 'green' }}>+</Text>
                                     </TouchableOpacity>
                                 </TouchableOpacity>
@@ -50,8 +63,10 @@ export default class LibraryScreen extends React.Component {
                 </ScrollView>
             </View>
         );
+
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

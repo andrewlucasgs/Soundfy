@@ -7,12 +7,15 @@ import LibraryScreen from '../screens/LibraryScreen';
 import SearchScreen from '../screens/SearchScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import MusicsScreen from '../screens/MusicsScreen';
+import AlbunsLibraryScreen from '../screens/AlbunsLibraryScreen';
+
 
 
 
 const HomeStack = createStackNavigator({
   Home: LibraryScreen,
   Musics: MusicsScreen,
+  AlbunsLibrary: AlbunsLibraryScreen,
 });
 
 HomeStack.navigationOptions = {

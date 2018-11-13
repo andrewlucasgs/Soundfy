@@ -21,7 +21,7 @@ export default class LibraryScreen extends React.Component {
 
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View>
-            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Musics')}} style={styles.listItems}>
+            <TouchableOpacity onPress={()=>{this.props.navigation.push('Musics')}} style={styles.listItems}>
               <View>
                 <Icon.Ionicons
                   name={Platform.OS === 'ios' ? 'ios-musical-note' : 'md-musical-note'}
@@ -43,7 +43,7 @@ export default class LibraryScreen extends React.Component {
             </TouchableOpacity>
           </View>
           <View>
-            <TouchableOpacity style={styles.listItems}>
+            <TouchableOpacity style={styles.listItems} onPress={()=>{this.props.navigation.navigate('AlbunsLibrary')}}>
               <Icon.Ionicons
                 name={Platform.OS === 'ios' ? 'ios-disc' : 'md-disc'}
                 size={26}
