@@ -3,21 +3,28 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import LibraryScreen from '../screens/LibraryScreen';
-import SearchScreen from '../screens/SearchScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-import MusicsScreen from '../screens/MusicsScreen';
-import AlbunsLibraryScreen from '../screens/AlbunsLibraryScreen';
 
+import SearchScreen from '../screens/search/SearchScreen';
 
+import NavigationScreen from '../screens/navigation/NavigationScreen';
+
+import LibraryScreen from '../screens/library/LibraryScreen';
+import MusicLibraryScreen from '../screens/library/MusicLibraryScreen';
+import AlbumLibraryScreen from '../screens/library/AlbumLibraryScreen';
+import ArtistLibraryScreen from '../screens/library/ArtistLibraryScreen';
+import PlaylistLibraryScreen from '../screens/library/PlaylistLibraryScreen';
+
+import PlayerScreen from '../screens/player/PlayerScreen'
 
 
 const HomeStack = createStackNavigator({
   Home: LibraryScreen,
-  Musics: MusicsScreen,
-  AlbunsLibrary: AlbunsLibraryScreen,
+  MusicLibrary: MusicLibraryScreen,
+  AlbunsLibrary: AlbumLibraryScreen,
+  ArtistLibrary: ArtistLibraryScreen,
+  PlaylistLibrary: PlaylistLibraryScreen,
 });
-
+HomeStack.initialRouteName = 'Home';
 HomeStack.navigationOptions = {
   tabBarLabel: 'Biblioteca',
   tabBarIcon: ({ focused }) => (
@@ -46,11 +53,11 @@ SearchStack.navigationOptions = {
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const NavigationStack = createStackNavigator({
+  Navigation: NavigationScreen,
 });
 
-SettingsStack.navigationOptions = {
+NavigationStack.navigationOptions = {
   tabBarLabel: 'Navegar',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -60,12 +67,29 @@ SettingsStack.navigationOptions = {
   ),
 };
 
+
+const PlayerStack = createStackNavigator({
+  Player: PlayerScreen,
+});
+
+PlayerStack.navigationOptions = {
+  tabBarLabel: 'Tocando',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-play' : 'md-play'}
+    />
+  ),
+};
+
 export default createBottomTabNavigator({
   HomeStack,
   SearchStack,
-  SettingsStack,
+  NavigationStack,
+  PlayerStack,
 },
-  {
+  { 
+    animationEnabled: true,
     tabBarOptions: {
       activeTintColor: '#fff',
       inactiveTintColor: '#fff',
